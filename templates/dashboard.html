@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+{% block body %}
+
+
+<!-- Page Header-->
+<header class="masthead"
+    style="background-image: url(' {{url_for( 'static', filename='assets/img/admin-panel.jpg' )}}   ')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Welcome to Admin dashboard</h1>
+                    <span class="subheading"> {{params['subheading']}} </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<table class="table table-hover align-middle" style="margin: auto;width: 70vw;">
+    <h1 style="position: relative; left: 220px;" >Navigation</h1>
+    <button style="position: relative; left: 220px;" class="btn btn-primary text-uppercase" > <a style="color: white;" href="/edit/0">Add a New Post</a> </button>
+    <hr>
+    <button style="position: relative; left: 220px;" class="btn btn-primary text-uppercase" > <a style="color: white;" href="/logout">Logout</a> </button>
+    <hr>
+
+    <h2 style="position: relative; left: 220px;" >Upload File</h2>
+      <form  action="/uploader" method="get" enctype="multipart/form-data">
+        <input style="position: relative;left: 220px;" type="file" name="file1" id="">
+        <button style="position: relative;left: 300px;" class="btn btn-primary text-uppercase" type="submit">submit</button>
+      </form>
+    <hr>
+    <h2 style="position: relative; left: 220px;" >Edit Posts</h2>
+    
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Date</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    {% for post in posts %}
+
+      <tr>
+        <th scope="row"> {{post.s_no}} </th>
+        <td>{{post.title}}</td>
+        <td>{{post.date}}</td>
+        <td> <a href="/edit/{{post.s_no}}"><button class="btn btn-primary text-uppercase">Edit</button></a></td>
+        <td> <a href="/delete/{{post.s_no}}"><button class="btn btn-primary text-uppercase" >Delete</button></a></td>
+      </tr>
+ 
+    {% endfor %}
+
+
+    </tbody>
+  </table>
+
+              
+        </div>
+    </div>
+</div>
+
+{% endblock %}
